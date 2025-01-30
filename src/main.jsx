@@ -1,0 +1,18 @@
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import App from './App.jsx'
+import Prebuild from './Prebuild.jsx'
+
+const urlParams = new URLSearchParams(window.location.search);
+const isPrebuild = urlParams.get("prebuild") ?? false;
+
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    {isPrebuild ? (
+      <Prebuild />
+    ) : (
+      <App />
+    )}
+  </StrictMode>,
+)
