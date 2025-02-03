@@ -1,21 +1,18 @@
 import { useCallback } from "react";
 import {
-  DailyEventObject,
-  DailyEventObjectParticipant,
-} from "@daily-co/daily-js";
-import {
   DailyAudio,
   DailyVideo,
-  useDaily,
+  useCallObject,
   useDailyEvent,
   useMeetingState,
   useParticipantCounts,
   useParticipantIds,
   useScreenShare,
+  DailyProvider,
 } from "@daily-co/daily-react";
 
 export default function App() {
-  const callObject = useDaily();
+  const callObject = useCallObject();
 
   const logEvent = useCallback((evt) => {
     if ("action" in evt) {
@@ -86,7 +83,7 @@ export default function App() {
   const meetingState = useMeetingState();
 
   return (
-    <>
+    <DailyProvider>
       <div className="App">
         <button onClick={joinRoom}>
           Join call
@@ -108,6 +105,6 @@ export default function App() {
       <DailyAudio />
       <div id="meetingState">Meeting State: {meetingState}</div>
       <div id="participantCount">Total Participants: {participantCounts}</div>
-    </>
+    </DailyProvider>
   );
 }
