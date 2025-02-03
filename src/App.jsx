@@ -16,7 +16,6 @@ export default function App() {
 
   const logEvent = useCallback((evt) => {
     if ("action" in evt) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       console.log(`logEvent: ${evt.action}`, evt);
     } else {
       console.log("logEvent:", evt);
