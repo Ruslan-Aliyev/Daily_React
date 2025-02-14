@@ -53,18 +53,17 @@ export default function NonPrebuildApp() {
 
   // useDailyEvent("left-meeting", logEvent); // TypeScript Only
 
+  useEffect(() => {
+    if (!callObject) return;
 
-  // QUESTION: WHY THIS DONT WORK? WHY callObject have no '.on'? 
-  // Ref: https://docs.daily.co/reference/rn-daily-js/events/participant-events#participant-left
-  // Ref: https://docs.daily.co/reference/rn-daily-js/events/meeting-events#error
-
-  // callObject  
-  //   .on('participant-left', (event) => {
-  //     console.log('participant-left event: ', event);
-  //   })
-  //   .on('error', (event) => {
-  //     console.log('error event: ', event);
-  //   });
+    callObject  
+      .on('participant-left', (event) => {
+        console.log('participant-left event: ', event);
+      })
+      .on('error', (event) => {
+        console.log('error event: ', event);
+      });
+  }, [callObject]);
 
   const joinRoom = useCallback(() => {
     if (!callObject) {
@@ -103,7 +102,6 @@ export default function NonPrebuildApp() {
   const meetingState = useMeetingState();
 
   // QUESTION: WHY MUTING DONT ACTUALLY WORK?
-  // Ref: https://docs.daily.co/reference/rn-daily-js/instance-methods/set-local-audio
   const mute = useCallback(async () => {
     if (!callObject) {
       return;
@@ -117,7 +115,6 @@ export default function NonPrebuildApp() {
     callObject.setLocalAudio(false);
   });
 
-  // Ref: https://docs.daily.co/reference/rn-daily-js/instance-methods/set-local-video
   const videoOn = useCallback(async () => {
     if (!callObject) {
       return;
