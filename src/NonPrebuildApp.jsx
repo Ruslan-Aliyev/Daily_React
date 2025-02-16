@@ -106,13 +106,13 @@ export default function NonPrebuildApp() {
     if (!callObject) {
       return;
     }
-    callObject.setLocalAudio(true);
+    callObject.setLocalAudio(false);
   });
   const unmute = useCallback(async () => {
     if (!callObject) {
       return;
     }
-    callObject.setLocalAudio(false);
+    callObject.setLocalAudio(true);
   });
 
   const videoOn = useCallback(async () => {
